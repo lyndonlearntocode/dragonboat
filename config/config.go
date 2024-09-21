@@ -797,6 +797,12 @@ type LogDBConfig struct {
 	KVBlockSize                        uint64
 	SaveBufferSize                     uint64
 	MaxSaveBufferSize                  uint64
+	ForkedLogDBConfig                  *ForkedLogDBConfig
+}
+
+type ForkedLogDBConfig struct {
+	EachFsyncDisabled bool
+	WALBytesPerSync   int
 }
 
 // GetDefaultLogDBConfig returns the default configurations for the LogDB

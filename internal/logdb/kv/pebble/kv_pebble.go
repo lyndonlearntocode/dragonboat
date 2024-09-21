@@ -202,6 +202,10 @@ func openPebbleDB(config config.LogDBConfig, callback kv.LogDBCallback,
 		Cache:                       cache,
 		Logger:                      PebbleLogger,
 	}
+	if config.ForkedLogDBConfig != nil {
+		wo.Sync = !config.ForkedLogDBConfig.EachFsyncDisabled
+		opts.WALBytesPerSync = config.ForkedLogDBConfig.WALBytesPerSync
+	}
 	if fs != vfs.DefaultFS {
 		opts.FS = vfs.NewPebbleFS(fs)
 	}
